@@ -1,12 +1,7 @@
 [
   {
     "id": 1,
-    "name": {
-      "english": "Bulbasaur",
-      "japanese": "フシギダネ",
-      "chinese": "妙蛙种子",
-      "french": "Bulbizarre"
-    },
+    "name": "Raichus",
     "type": [
       "Grass",
       "Poison"
@@ -23,12 +18,7 @@
   },
   {
     "id": 2,
-    "name": {
-      "english": "Ivysaur",
-      "japanese": "フシギソウ",
-      "chinese": "妙蛙草",
-      "french": "Herbizarre"
-    },
+    "name": "Raichuss",
     "type": [
       "Grass",
       "Poison"
@@ -44,76 +34,9 @@
     "image": "http://localhost:3000/assets/pokemons/2.png"
   },
   {
-    "id": 3,
-    "name": {
-      "english": "Venusaur",
-      "japanese": "フシギバナ",
-      "chinese": "妙蛙花",
-      "french": "Florizarre"
-    },
-    "type": [
-      "Grass",
-      "Poison"
-    ],
-    "base": {
-      "HP": 80,
-      "Attack": 82,
-      "Defense": 83,
-      "Sp. Attack": 100,
-      "Sp. Defense": 100,
-      "Speed": 80
-    },
-    "image": "http://localhost:3000/assets/pokemons/3.png"
-  },
-  {
-    "id": 4,
-    "name": {
-      "english": "Charmander",
-      "japanese": "ヒトカゲ",
-      "chinese": "小火龙",
-      "french": "Salamèche"
-    },
-    "type": [
-      "Fire"
-    ],
-    "base": {
-      "HP": 39,
-      "Attack": 52,
-      "Defense": 43,
-      "Sp. Attack": 60,
-      "Sp. Defense": 50,
-      "Speed": 65
-    },
-    "image": "http://localhost:3000/assets/pokemons/4.png"
-  },
-  {
-    "id": 5,
-    "name": {
-      "english": "Charmeleon",
-      "japanese": "リザード",
-      "chinese": "火恐龙",
-      "french": "Reptincel"
-    },
-    "type": [
-      "Fire"
-    ],
-    "base": {
-      "HP": 58,
-      "Attack": 64,
-      "Defense": 58,
-      "Sp. Attack": 80,
-      "Sp. Defense": 65,
-      "Speed": 80
-    },
-    "image": "http://localhost:3000/assets/pokemons/5.png"
-  },
-  {
     "id": 6,
     "name": {
-      "english": "Charizard",
-      "japanese": "リザードン",
-      "chinese": "喷火龙",
-      "french": "Dracaufeu"
+      "french": "Dracaufeuu"
     },
     "type": [
       "Fire",
@@ -127,7 +50,7 @@
       "Sp. Defense": 85,
       "Speed": 100
     },
-    "image": "http://localhost:3000/assets/pokemons/6.png"
+    "image": "http://localhost:3000/assets/pokemons/8.png"
   },
   {
     "id": 7,
@@ -193,48 +116,6 @@
     "image": "http://localhost:3000/assets/pokemons/9.png"
   },
   {
-    "id": 10,
-    "name": {
-      "english": "Caterpie",
-      "japanese": "キャタピー",
-      "chinese": "绿毛虫",
-      "french": "Chenipan"
-    },
-    "type": [
-      "Bug"
-    ],
-    "base": {
-      "HP": 45,
-      "Attack": 30,
-      "Defense": 35,
-      "Sp. Attack": 20,
-      "Sp. Defense": 20,
-      "Speed": 45
-    },
-    "image": "http://localhost:3000/assets/pokemons/10.png"
-  },
-  {
-    "id": 11,
-    "name": {
-      "english": "Metapod",
-      "japanese": "トランセル",
-      "chinese": "铁甲蛹",
-      "french": "Chrysacier"
-    },
-    "type": [
-      "Bug"
-    ],
-    "base": {
-      "HP": 50,
-      "Attack": 20,
-      "Defense": 55,
-      "Sp. Attack": 25,
-      "Sp. Defense": 25,
-      "Speed": 30
-    },
-    "image": "http://localhost:3000/assets/pokemons/11.png"
-  },
-  {
     "id": 12,
     "name": {
       "english": "Butterfree",
@@ -255,28 +136,6 @@
       "Speed": 70
     },
     "image": "http://localhost:3000/assets/pokemons/12.png"
-  },
-  {
-    "id": 13,
-    "name": {
-      "english": "Weedle",
-      "japanese": "ビードル",
-      "chinese": "独角虫",
-      "french": "Aspicot"
-    },
-    "type": [
-      "Bug",
-      "Poison"
-    ],
-    "base": {
-      "HP": 40,
-      "Attack": 35,
-      "Defense": 30,
-      "Sp. Attack": 20,
-      "Sp. Defense": 20,
-      "Speed": 50
-    },
-    "image": "http://localhost:3000/assets/pokemons/13.png"
   },
   {
     "id": 14,
@@ -321,28 +180,6 @@
       "Speed": 75
     },
     "image": "http://localhost:3000/assets/pokemons/15.png"
-  },
-  {
-    "id": 16,
-    "name": {
-      "english": "Pidgey",
-      "japanese": "ポッポ",
-      "chinese": "波波",
-      "french": "Roucool"
-    },
-    "type": [
-      "Normal",
-      "Flying"
-    ],
-    "base": {
-      "HP": 40,
-      "Attack": 45,
-      "Defense": 40,
-      "Sp. Attack": 35,
-      "Sp. Defense": 35,
-      "Speed": 56
-    },
-    "image": "http://localhost:3000/assets/pokemons/16.png"
   },
   {
     "id": 17,
@@ -2127,27 +1964,6 @@
     "image": "http://localhost:3000/assets/pokemons/99.png"
   },
   {
-    "id": 100,
-    "name": {
-      "english": "Voltorb",
-      "japanese": "ビリリダマ",
-      "chinese": "霹雳电球",
-      "french": "Voltorbe"
-    },
-    "type": [
-      "Electric"
-    ],
-    "base": {
-      "HP": 40,
-      "Attack": 30,
-      "Defense": 50,
-      "Sp. Attack": 55,
-      "Sp. Defense": 55,
-      "Speed": 100
-    },
-    "image": "http://localhost:3000/assets/pokemons/100.png"
-  },
-  {
     "id": 101,
     "name": {
       "english": "Electrode",
@@ -3196,27 +3012,6 @@
     "image": "http://localhost:3000/assets/pokemons/149.png"
   },
   {
-    "id": 150,
-    "name": {
-      "english": "Mewtwo",
-      "japanese": "ミュウツー",
-      "chinese": "超梦",
-      "french": "Mewtwo"
-    },
-    "type": [
-      "Psychic"
-    ],
-    "base": {
-      "HP": 106,
-      "Attack": 110,
-      "Defense": 90,
-      "Sp. Attack": 154,
-      "Sp. Defense": 90,
-      "Speed": 130
-    },
-    "image": "http://localhost:3000/assets/pokemons/150.png"
-  },
-  {
     "id": 151,
     "name": {
       "english": "Mew",
@@ -3236,5 +3031,100 @@
       "Speed": 100
     },
     "image": "http://localhost:3000/assets/pokemons/151.png"
+  },
+  {
+    "id": 149,
+    "name": {
+      "english": "Pikachu",
+      "french": "Pikachu"
+    },
+    "type": [
+      "Electric"
+    ],
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokemons/pikachu.png"
+  },
+  {
+    "id": 150,
+    "name": {
+      "french": "Pikachu"
+    },
+    "type": [
+      "Electric"
+    ],
+    "image": " https://assets.pokemon.com/assets/cms2/img/pokemons/pikachu.png"
+  },
+  {
+    "id": 151,
+    "name": {
+      "french": "Flamarion"
+    },
+    "type": [
+      "Fire"
+    ],
+    "image": " Flamarion Image"
+  },
+  {
+    "id": 152,
+    "name": {
+      "english": "Pikachuuu",
+      "french": "Pikachuuu"
+    },
+    "type": [
+      "Electric"
+    ],
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokemons/pikachu.png"
+  },
+  {
+    "id": 153,
+    "name": {
+      "french": "Pikachu"
+    },
+    "type": [
+      "Electric"
+    ],
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
+  },
+  {
+    "id": 154,
+    "name": {
+      "english": "Pikachuuu",
+      "french": "Pikachuuu"
+    },
+    "type": [
+      "Electric"
+    ],
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokemons/pikachu.png"
+  },
+  {
+    "id": 155,
+    "name": {
+      "french": "Pikachu"
+    },
+    "type": [
+      "Grass",
+      "Poison"
+    ],
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png"
+  },
+  {
+    "id": 150,
+    "name": {
+      "french": "Pikachu"
+    },
+    "type": [
+      "Electric"
+    ],
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/025.png"
+  },
+  {
+    "id": 151,
+    "name": {
+      "french": "Ringuer"
+    },
+    "type": [
+      "Grass",
+      "Poison"
+    ],
+    "image": " https://assets.pokemon.com/assets/cms2/img/pokemons/pikachu.png"
   }
 ]
