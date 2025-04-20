@@ -1,32 +1,47 @@
 import mongoose from 'mongoose';
 
-// Définition du schéma pour un Pokémon
 const pokemonSchema = new mongoose.Schema({
   name: {
-    english: { type: String, required: true },  // Le nom en anglais est obligatoire
-    french: { type: String, required: true },   // Le nom en français est obligatoire
+    french: { type: String, required: true },
+    english: { type: String, required: true },
+    japanese: String,
+    chinese: String
   },
   type: {
-    type: [String], // Tableau de types
+    type: [String],
+    required: true,
     validate: {
-      validator: function (v) {
-        return v && v.length > 0;  // Assure qu'il y a au moins un type
+      validator: function(v) {
+        const allowedTypes = [
+          "Fire", "Water", "Grass", "Electric", "Ice", "Fighting",
+          "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock",
+          "Ghost", "Dragon", "Dark", "Steel", "Fairy"
+        ];
+        return Array.isArray(v) && v.length > 0 && v.every(type => allowedTypes.includes(type));
       },
-      message: "Un Pokémon doit avoir au moins un type."
+      message: 'Les types doivent être valides et non vides.'
     }
   },
-  base: {
-    HP: { type: Number, required: true },
-    Attack: { type: Number, required: true },
-    Defense: { type: Number, required: true },
-    "Sp. Attack": { type: Number, required: true },
-    "Sp. Defense": { type: Number, required: true },
-    Speed: { type: Number, required: true },
+  image: {
+    type: String,
+    required: true
   },
-  image: { type: String, required: true },
+  stats: {
+    hp: { type: Number, required: true },
+    attack: { type: Number, required: true },
+    defense: { type: Number, required: true },
+    specialAttack: { type: Number, required: true },
+    specialDefense: { type: Number, required: true },
+    speed: { type: Number, required: true }
+  },
+  evolutions: [{
+    type: Number,
+    ref: 'Pokemon'
+  }]
+}, {
+  timestamps: true // Ajoute les champs createdAt et updatedAt automatiquement
 });
 
-// Création du modèle à partir du schéma
 const Pokemon = mongoose.model('Pokemon', pokemonSchema);
 
 export default Pokemon;

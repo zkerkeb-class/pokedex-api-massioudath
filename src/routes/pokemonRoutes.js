@@ -133,81 +133,154 @@ router.get('/pokemons/:id', (req, res) => {
 
 export default router;
 */
-
+/*
 
 import express from 'express';
 import mongoose from 'mongoose';
 import Pokemon from '../models/pokemonModel.js';  // Modèle Pokémon
+
 const router = express.Router();
 
-
-// Route pour récupérer tous les Pokémons
-// Exemple dans votre route Express
+// Route pour récupérer tous les Pokémons avec pagination
 router.get('/pokemons', async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;  // Par défaut, page 1 et 10 éléments par page
+  const { page = 1, limit = 10 } = req.query;
 
   try {
     const pokemons = await Pokemon.find()
-      .skip((page - 1) * limit)  // Calcul de l'offset
-      .limit(parseInt(limit));   // Limitation du nombre de Pokémon récupérés
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit));
 
-    const totalPokemons = await Pokemon.countDocuments();  // Compter le total des Pokémon
-    const totalPages = Math.ceil(totalPokemons / limit);    // Calcul du nombre total de pages
+    const totalPokemons = await Pokemon.countDocuments();
+    const totalPages = Math.ceil(totalPokemons / limit);
 
     res.json({ pokemons, totalPages, currentPage: page });
   } catch (error) {
+    console.error("Erreur lors de la récupération des Pokémon", error);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+});
+
+// Route POST pour créer un Pokémon
+router.post('/pokemons', async (req, res) => {
+  try {
+    const { name, types, imageUrl } = req.body;
+
+    if (!name || !types || !imageUrl) {
+      return res.status(400).json({ message: "Veuillez fournir un nom, un type et une URL pour l'image." });
+    }
+
+    const newPokemon = new Pokemon({
+      name,
+      type: types,
+      image: imageUrl,
+    });
+
+    await newPokemon.save();
+    res.status(201).json(newPokemon);
+  } catch (error) {
+    console.error("Erreur lors de la création du Pokémon", error);
+    res.status(500).json({ message: "Erreur lors de la création du Pokémon" });
+  }
+});
+
+// Route PUT pour mettre à jour un Pokémon existant par son ID
+const mongoose = require('mongoose');
+
+router.put("/pokemons/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, type, image } = req.body;
+
+  // Vérifie si l'ID est valide
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "ID invalide" });
+  }
+
+  try {
+    // Recherche et mise à jour du Pokémon
+    const pokemon = await Pokemon.findById(id);
+
+    if (!pokemon) {
+      return res.status(404).json({ message: "Pokémon non trouvé" });
+    }
+
+    // Mise à jour des champs
+    pokemon.name.french = name;  // Exemple pour la mise à jour du nom
+    pokemon.type = type.split(',').map(t => t.trim());
+    pokemon.image = image;
+
+    await pokemon.save();  // Sauvegarde les changements dans MongoDB
+
+    res.status(200).json({ message: "Pokémon mis à jour avec succès", pokemon });
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour du Pokémon", error);
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
 
 
-// Route pour créer un Pokémon
-// Route pour créer un nouveau Pokémon
-router.post('/pokemons', async (req, res) => {
-  try {
-    const { name, types, imageUrl } = req.body;
-    const newPokemon = new Pokemon({
-      name,
-      types,
-      imageUrl,
-    });
 
-    await newPokemon.save();
-    res.status(201).json(newPokemon); // Retourner le Pokémon créé
+
+// Route DELETE pour supprimer un Pokémon
+router.delete("/pokemons/:id", async (req, res) => {
+  const { id } = req.params;
+
+  // Cast de l'ID en ObjectId
+  let objectId;
+  try {
+    objectId = mongoose.Types.ObjectId(id);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Erreur lors de la création du Pokémon" });
+    return res.status(400).json({ message: "ID invalide" });
+  }
+
+  try {
+    const pokemon = await Pokemon.findByIdAndDelete(objectId);
+    if (!pokemon) {
+      return res.status(404).json({ message: "Pokémon non trouvé" });
+    }
+    res.status(200).json({ message: "Pokémon supprimé avec succès" });
+  } catch (error) {
+    console.error("Erreur lors de la suppression du Pokémon", error);
+    res.status(500).json({ message: "Erreur serveur" });
   }
 });
 
+// Route GET pour récupérer un Pokémon par ID
+router.get('/pokemons/:id', async (req, res) => {
+  const { id } = req.params;
 
-
-// Route PUT pour mettre à jour un Pokémon par son ID
-// Route PUT pour mettre à jour un Pokémon par son ID
-router.put("/pokemons/:id", async (req, res) => {
-  const { id } = req.params;  // ID du Pokémon
-  const { name, type, image } = req.body;
+  // Cast de l'ID en ObjectId
+  let objectId;
+  try {
+    objectId = mongoose.Types.ObjectId(id);
+  } catch (error) {
+    return res.status(400).json({ message: "ID invalide" });
+  }
 
   try {
-    const pokemon = await Pokemon.findById(id); // Trouve le Pokémon par son ID
+    const pokemon = await Pokemon.findById(objectId); // Recherche du Pokémon
     if (!pokemon) {
       return res.status(404).json({ message: "Pokémon non trouvé" });
     }
 
-    // Met à jour les données
-    pokemon.name.french = name.french;
-    pokemon.type = type;
-    pokemon.image = image;
-
-    await pokemon.save();  // Sauvegarde les modifications dans la base de données
-
-    return res.status(200).json({ message: "Pokémon mis à jour avec succès", pokemon });
+    res.json(pokemon);
   } catch (error) {
-    console.error("Erreur lors de la mise à jour du Pokémon", error);
-    return res.status(500).json({ message: "Erreur serveur" });
+    console.error("Erreur lors de la récupération du Pokémon", error);
+    res.status(500).json({ message: "Erreur serveur" });
   }
 });
 
+export default router;
+*/
+
+import express from 'express';
+import PokemonController from '../controllers/pokemonController.js';
+
+const router = express.Router();
+
+router.get('/pokemons', PokemonController.getAllPokemons); // Récupérer tous les pokémons
+router.get('/pokemons/:id', PokemonController.getPokemonById); // Récupérer un pokémon par ID
+router.post('/pokemons', PokemonController.createPokemon); // Créer un nouveau pokémon
+router.put('/pokemons/:id', PokemonController.updatePokemon); // Mettre à jour un pokémon
+router.delete('/pokemons/:id', PokemonController.deletePokemon); // Supprimer un pokémon
 
 export default router;
-
