@@ -55,34 +55,60 @@ app.listen(PORT, () => {
 
 
 import express from 'express';
-import cors from 'cors';  // Import du middleware CORS
-import connectDB from '../config/db.js';  // Mise à jour du chemin pour la connexion à MongoDB
-import pokemonRoutes from './routes/pokemonRoutes.js';  // Routes pour les Pokémon
+import cors from 'cors';
+import connectDB from '../config/db.js';
+import pokemonRoutes from './routes/pokemonRoutes.js';
 import path from "path";
 import { fileURLToPath } from "url";
+import authRoutes from './routes/authRoutes.js';
+import dotenv from 'dotenv';
+import verifyToken from './middleware/auth.js'; // Importez le middleware explicitement ici
 
+
+dotenv.config();
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Utiliser CORS pour autoriser les requêtes provenant d'autres origines
+// Configuration CORS
 const corsOptions = {
-   origin: 'http://localhost:5173',  // Autoriser le frontend React
-   methods: 'GET,POST,PUT,DELETE',  // Méthodes autorisées
-   allowedHeaders: 'Content-Type,Authorization'  // En-têtes autorisés
+   origin: 'http://localhost:5173',
+   methods: 'GET,POST,PUT,DELETE',
+   allowedHeaders: 'Content-Type,Authorization'
 };
 
-app.use(cors(corsOptions));  // Applique CORS sur toutes les routes
+app.use(cors(corsOptions));
 app.use("/assets", express.static(path.join(__dirname, "../assets")));
 
 // Connecter à la base de données
 connectDB();
 
-// Middleware pour traiter les données JSON dans les requêtes
+// Middleware pour traiter les données JSON
 app.use(express.json());
 
-// Utilisation des routes Pokémon
+// Routes d'authentification publiques (sans vérification de token)
+app.use('/api/auth', authRoutes);
+
+// Route de base
+app.get("/", (req, res) => {
+    res.send("Bienvenue sur l'API Pokémon 🎉");
+});
+
+// Middleware d'authentification appliqué uniquement aux routes protégées qui suivent
+// IMPORTANT: Placez ce middleware APRÈS les routes publiques et AVANT les routes protégées
+app.use('/api', verifyToken); // Appliquer le middleware uniquement aux routes qui commencent par /api (sauf celles déjà définies)
+
+// Routes protégées nécessitant une authentification
 app.use('/api', pokemonRoutes);
+
+// Middleware pour attraper les erreurs
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({
+       message: 'Une erreur est survenue !',
+       error: process.env.NODE_ENV === 'development' ? err.message : 'Erreur interne du serveur'
+    });
+});
 
 // Démarrer le serveur
 const PORT = process.env.PORT || 3000;

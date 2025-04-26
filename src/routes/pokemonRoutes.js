@@ -274,13 +274,20 @@ export default router;
 
 import express from 'express';
 import PokemonController from '../controllers/pokemonController.js';
+import verifyToken from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.get('/pokemons', PokemonController.getAllPokemons); // Récupérer tous les pokémons
-router.get('/pokemons/:id', PokemonController.getPokemonById); // Récupérer un pokémon par ID
-router.post('/pokemons', PokemonController.createPokemon); // Créer un nouveau pokémon
-router.put('/pokemons/:id', PokemonController.updatePokemon); // Mettre à jour un pokémon
-router.delete('/pokemons/:id', PokemonController.deletePokemon); // Supprimer un pokémon
+// Routes publiques
+router.get('/pokemons', PokemonController.getAllPokemons);
+router.get('/pokemons/:id', PokemonController.getPokemonById);
+
+// Protéger toutes les routes après ce point
+router.use(verifyToken);
+
+// Routes protégées
+router.post('/pokemons', PokemonController.createPokemon);
+router.put('/pokemons/:id', PokemonController.updatePokemon);
+router.delete('/pokemons/:id', PokemonController.deletePokemon);
 
 export default router;

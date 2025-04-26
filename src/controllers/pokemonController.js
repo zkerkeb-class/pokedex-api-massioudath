@@ -94,7 +94,7 @@ class PokemonController {
    */
   static async deletePokemon(req, res) {
     try {
-      const pokemon = await Pokemon.findByIdAndDelete(req.params.id);
+      const pokemon = await Pokemon.findByIdAndDelete(req.params.id); // ✅ Correction ici
       if (!pokemon) {
         return res.status(404).json({ message: "Pokemon non trouvé" });
       }
@@ -103,6 +103,7 @@ class PokemonController {
       res.status(500).json({ message: "Erreur lors de la suppression du pokémon", error: error.message });
     }
   }
+  
 }
 
 export default PokemonController;
