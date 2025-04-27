@@ -73,3 +73,25 @@ app.use('/assets', express.static(path.join(__dirname, '../assets')));
 - Seuls les fichiers du dossier `assets` sont exposés
 - Les autres dossiers du projet restent inaccessibles
 - En production, considérez l'utilisation d'un CDN pour les fichiers statiques
+
+
+
+📚 API - Pokedex Massioudath
+Bienvenue sur la documentation de l'API Backend du projet Pokedex Massioudath !
+Cette API RESTful gère l'authentification des utilisateurs et la gestion des Pokémon.
+
+⚙️ Technologies utilisées
+- Node.js
+- Express.js
+- MongoDB avec Mongoose
+- JWT (JSON Web Tokens)
+- CORS
+🚀 Installation locale
+
+- Cloner le projet :
+- git clone https://github.com/votre-utilisateur/pokedex-api-massioudath.git
+- cd pokedex-api-massioudath/backend
+- npm install
+
+Démarrer le server
+-node src/index.js
