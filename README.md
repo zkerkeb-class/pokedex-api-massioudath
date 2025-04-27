@@ -76,22 +76,32 @@ app.use('/assets', express.static(path.join(__dirname, '../assets')));
 
 
 
-📚 API - Pokedex Massioudath
+## API - Pokedex Massioudath
 Bienvenue sur la documentation de l'API Backend du projet Pokedex Massioudath !
 Cette API RESTful gère l'authentification des utilisateurs et la gestion des Pokémon.
 
-⚙️ Technologies utilisées
+## Technologies utilisées
 - Node.js
 - Express.js
 - MongoDB avec Mongoose
 - JWT (JSON Web Tokens)
 - CORS
-🚀 Installation locale
+## Installation locale
 
 - Cloner le projet :
 - git clone https://github.com/votre-utilisateur/pokedex-api-massioudath.git
 - cd pokedex-api-massioudath/backend
 - npm install
+
+## Variables d'environnement
+Avant de démarrer le projet, vous devez créer un fichier .env à la racine du projet.
+
+Voici un exemple de ce qu'il doit contenir :
+
+# .env
+
+API_URL=http://localhost:3000
+JWT_SECRET=your_secret_key_here
 
 Démarrer le server
 -node src/index.js

@@ -3,8 +3,33 @@ import pokemonsList from './pokemonsList.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+
+/**
+ * Génère un fichier `pokemons.json` à partir d'une liste statique de Pokémon.
+ *
+ * - Convertit un tableau de Pokémon en format JSON.
+ * - Écrit le fichier JSON sur le disque.
+ * - Utilise un chemin absolu sécurisé grâce à `import.meta.url`.
+ *
+ * Peut être utilisé comme :
+ * - Script exécuté directement.
+ * - Module importé dans un autre fichier.
+ *
+ * @module utils/generatePokemonsJson
+ */
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+
+/**
+ * Convertit la liste des Pokémon en JSON et l'écrit dans un fichier `pokemons.json`.
+ *
+ * @function
+ * @returns {void}
+ */
+
 
 const generatePokemonsJson = () => {
     try {

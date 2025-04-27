@@ -1,5 +1,20 @@
 import mongoose from 'mongoose';
 
+
+/**
+ * Modèle Mongoose représentant un Pokémon.
+ *
+ * - Contient le nom du Pokémon dans plusieurs langues.
+ * - Contient les types (avec validation sur des types autorisés).
+ * - Contient les statistiques de base (HP, attaque, défense, etc.).
+ * - Gère les évolutions (références à d'autres Pokémon).
+ * - Ajoute automatiquement les timestamps (`createdAt`, `updatedAt`).
+ *
+ * @module models/Pokemon
+ */
+
+
+
 const pokemonSchema = new mongoose.Schema({
   name: {
     french: { type: String, required: true },

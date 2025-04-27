@@ -276,13 +276,25 @@ import express from 'express';
 import PokemonController from '../controllers/pokemonController.js';
 import verifyToken from '../middleware/auth.js';
 
+
+/**
+ * Définition des routes pour la gestion des Pokémon.
+ *
+ * - Certaines routes sont publiques (lecture).
+ * - D'autres routes sont protégées par un middleware d'authentification JWT (`verifyToken`).
+ *
+ * @module routes/pokemonRoutes
+ */
+
+
 const router = express.Router();
 
 // Routes publiques
 router.get('/pokemons', PokemonController.getAllPokemons);
 router.get('/pokemons/:id', PokemonController.getPokemonById);
 
-// Protéger toutes les routes après ce point
+// Protéger toutes les routes après ce point; 
+// Middleware de protection : toutes les routes suivantes nécessitent un token valide
 router.use(verifyToken);
 
 // Routes protégées

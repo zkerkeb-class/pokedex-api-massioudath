@@ -65,8 +65,26 @@ import dotenv from 'dotenv';
 import verifyToken from './middleware/auth.js'; // Importez le middleware explicitement ici
 
 
-dotenv.config();
-const app = express();
+/**
+ * Fichier principal de démarrage du serveur Express.
+ *
+ * - Configure les middlewares (CORS, parsing JSON, auth).
+ * - Connecte à la base de données MongoDB.
+ * - Définit les routes publiques et protégées.
+ * - Gère les erreurs globalement.
+ * - Démarre le serveur sur le port spécifié.
+ *
+ * @module server
+ */
+
+
+
+dotenv.config(); // Chargement des variables d'environnement
+
+const app = express(); // Initialisation de l'application Express
+
+//  Définition des chemins pour les fichiers statiques
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -78,6 +96,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Servir les fichiers statiques
 app.use("/assets", express.static(path.join(__dirname, "../assets")));
 
 // Connecter à la base de données

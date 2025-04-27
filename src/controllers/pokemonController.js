@@ -1,6 +1,23 @@
 import Pokemon from '../models/pokemonModel.js';  // Modèle Pokémon
 import mongoose from 'mongoose';  // Mongoose pour travailler avec MongoDB
 
+
+/**
+ * Contrôleur pour la gestion des Pokémon.
+ *
+ * - Récupérer tous les Pokémon
+ * - Récupérer un Pokémon par son ID
+ * - Créer un nouveau Pokémon
+ * - Mettre à jour un Pokémon existant
+ * - Supprimer un Pokémon
+ *
+ * Utilise Mongoose pour interagir avec la base de données MongoDB.
+ *
+ * @module controllers/PokemonController
+ */
+
+
+
 class PokemonController {
   /**
    * Récupère tous les pokémons
